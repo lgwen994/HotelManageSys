@@ -1,0 +1,69 @@
+﻿@model HotelManageSys.Models.Booking
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPaid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType.PaymentTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NeedParking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NeedParking)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CardNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Room)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Room.RoomId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Parking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Parking.ParkingId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="BookingId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

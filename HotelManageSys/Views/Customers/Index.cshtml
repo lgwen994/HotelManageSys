@@ -1,0 +1,94 @@
+﻿@model IEnumerable<HotelManageSys.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Customer Information</h2>
+<form asp-controller="Customers" asp-action="Index" class="form-inline pull-left">
+    <div class="form-group">
+        <input type="text" name="SearchString" placeholder="Email..." class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Find yourself" class="btn btn-default" />
+    </div>
+    <div class="form-group">
+        <a asp-action="Create" class="btn btn-default">Rigester</a>
+    </div>
+</form>
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelAgency)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TravelAgency)
+                </td>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-default">Details</a>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

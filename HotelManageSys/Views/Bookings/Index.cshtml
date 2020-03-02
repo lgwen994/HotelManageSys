@@ -1,0 +1,80 @@
+﻿@model HotelManageSys.Models.ViewModels.BookingCustomerViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Your Order</h2>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].IsPaid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].PaymentType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].NeedParking)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].Customer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].Room)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bookings[0].Parking)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsPaid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentType.PaymentTypeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NeedParking)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Room.RoomId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parking.ParkingId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn btn-default">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.BookingId" class="btn btn-default">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn btn-default">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

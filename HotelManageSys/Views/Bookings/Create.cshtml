@@ -1,0 +1,103 @@
+﻿@model HotelManageSys.Models.Booking
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Booking</h2>
+
+<h4>
+    @Html.DisplayFor(model => model.Customer.FirstName)
+    @Html.DisplayFor(model => model.Room.RoomNumber)
+
+</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input id="IsPaidCheckbox" asp-for="IsPaid" /> @Html.DisplayNameFor(model => model.IsPaid)
+                    </label>
+                </div>
+            </div>
+            <div id ="PaymentTypeIdDiv" class="form-group">
+                <label asp-for="PaymentTypeId" class="control-label"></label>
+                <select asp-for="PaymentTypeId" class="form-control" asp-items="ViewBag.PaymentTypeId"></select>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input id="parkingCheckbox" asp-for="NeedParking" /> @Html.DisplayNameFor(model => model.NeedParking)
+                    </label>
+                </div>
+            </div>
+            <!-- -->
+            <div id ="CustomerIdDiv" class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+            </div>
+
+            <!-- -->
+            <div id ="RoomIdDiv" class="form-group">
+                <label asp-for="RoomId" class="control-label"></label>
+                <select asp-for="RoomId" class="form-control" asp-items="ViewBag.RoomId"></select>
+            </div>
+
+            <div id="parkingDiv" class="form-group">
+                <label asp-for="ParkingId" class="control-label"></label>
+                <select asp-for="ParkingId" class="form-control" asp-items="ViewBag.ParkingId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    $(document).ready(function () {
+        $("#parkingDiv").hide();
+        $("#CustomerIdDiv").hide();
+        $("#RoomIdDiv").hide();
+        $("#PaymentTypeIdDiv").hide();
+        
+        $("#parkingCheckbox").change(function () {
+            if ($("#parkingCheckbox").prop('checked')) {
+                $("#parkingDiv").show();
+            } else {
+                $("#parkingDiv").hide();
+            }
+            
+        });
+
+                $("#IsPaidCheckbox").change(function () {
+            if ($("#IsPaidCheckbox").prop('checked')) {
+                $("#PaymentTypeIdDiv").show();
+            } else {
+                $("#PaymentTypeIdDiv").hide();
+            }
+            
+        });
+        
+    });
+</script>

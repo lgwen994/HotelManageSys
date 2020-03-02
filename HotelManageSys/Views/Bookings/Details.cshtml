@@ -1,0 +1,78 @@
+﻿@model HotelManageSys.Models.Booking
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPaid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NeedParking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NeedParking)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Room)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Room.RoomNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Parking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Parking.ParkingNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.RoomStatus.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Room.RoomStatus.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookingId" class="btn btn-default">Edit</a>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Reception")))
+    {
+        <a asp-action="CheckIn" asp-route-id="@Model.BookingId" class="btn btn-default">Check In</a>
+        <a asp-action="CheckOut" asp-route-id="@Model.BookingId" class="btn btn-default">Check Out</a>
+    }
+        <a asp-action="Index" class="btn btn-default">Back to List</a>
+    </div>

@@ -1,0 +1,30 @@
+﻿@model HotelManageSys.Models.Parking
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Parking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingNum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParkingNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ParkingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,113 @@
+﻿
+@model HotelManageSys.Models.ViewModels.RoomsCustomerViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<form asp-action="Index" class="form-inline pull-left">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="form-group">
+            <input asp-for="SearchDateFrom" class="form-control" />
+            <span asp-validation-for="SearchDateFrom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="SearchDateTo" class="form-control" />
+            <span asp-validation-for="SearchDateTo" class="text-danger"></span>
+        </div>
+        <div id="RoomTypeDiv" class="form-group">
+            <select asp-for="RoomTypeId" class="form-control" asp-items="ViewBag.RoomTypeId"></select>
+            <span asp-validation-for="RoomTypeId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    }
+
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <div class="form-group">
+            <a asp-action="Create" class="btn btn-default">Create New</a>
+        </div>
+    }
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms[0].RoomNumber)
+            </th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Rooms[0].RoomStatus)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms[0].RoomType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms[0].RoomType.Price)
+            </th>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Rooms[0].IsBooked)
+
+                </th>
+            }
+            <th>Photo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomNumber)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomStatus.Status)
+
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType.Price)
+                </td>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsBooked)
+                    </td>
+                }
+
+                <td>
+                    <img src=@("/images/" + item.RoomType.Type + ".jpg") class="img-thumbnail" width="200">
+                </td>
+                <td>
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Details" asp-route-id="@item.RoomId" asp-route-customerid="@Model.Customer.CustomerId" class="btn btn-default">Details</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.RoomId" class="btn btn-default">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.RoomId" class="btn btn-default">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.RoomId" class="btn btn-default">Delete</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

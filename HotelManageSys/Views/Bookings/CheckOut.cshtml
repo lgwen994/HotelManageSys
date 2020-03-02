@@ -1,0 +1,76 @@
+﻿@model HotelManageSys.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Check Out</h2>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CheckOut">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookingId" />
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" readonly="readonly" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsPaid" readonly="readonly" /> @Html.DisplayNameFor(model => model.IsPaid)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentTypeId" class="control-label"></label>
+                <select asp-for="PaymentTypeId" class="form-control" asp-items="ViewBag.PaymentTypeId" readonly="readonly"></select>
+                <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="NeedParking" readonly="readonly"/> @Html.DisplayNameFor(model => model.NeedParking)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId" readonly="readonly"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomId" class="control-label"></label>
+                <select asp-for="RoomId" class="form-control" asp-items="ViewBag.RoomId" readonly="readonly"></select>
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkingId" class="control-label"></label>
+                <select asp-for="ParkingId" class="form-control" asp-items="ViewBag.ParkingId" readonly="readonly"></select>
+                <span asp-validation-for="ParkingId" class="text-danger"></span>
+            </div>
+     
+            <div class="form-group">
+                <input type="submit" value="Confirm Check Out" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
